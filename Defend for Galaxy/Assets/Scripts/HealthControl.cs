@@ -6,15 +6,22 @@ public class HealthControl : MonoBehaviour
 {
     [SerializeField] int health = 50;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] bool applyCamShake;
+    CamShake cameraShake;
+    private void Awake()
+    {
+        cameraShake = Camera.main.GetComponent<CamShake>();
+    }
 
 
-     void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         DamageDealer damageDealer= collision. GetComponent<DamageDealer>();
         if (damageDealer != null)
         {
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
+            ShakeCamera();
             damageDealer.Hit();
         }
     }
@@ -32,6 +39,13 @@ public class HealthControl : MonoBehaviour
         {
             ParticleSystem instance=Instantiate(hitEffect,transform.position,Quaternion.identity);
             Destroy(instance.gameObject,instance.main.duration+instance.main.startLifetime.constantMax);
+        }
+    }
+    void ShakeCamera()
+    {
+        if (cameraShake!=null&& applyCamShake)
+        {
+            cameraShake.Play();
         }
     }
 

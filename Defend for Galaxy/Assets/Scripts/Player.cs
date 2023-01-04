@@ -15,7 +15,12 @@ public class Player : MonoBehaviour
     [SerializeField] float padDown;
     Vector2 minSize;
     Vector2 maxSize;
+    ShooterControl shooter;
 
+    private void Awake()
+    {
+            shooter=GetComponent<ShooterControl>(); 
+    }
     void Start()
     {
         InitBounds();
@@ -46,4 +51,11 @@ public class Player : MonoBehaviour
         newPosition.y = Mathf.Clamp(transform.position.y + delta.y, minSize.y +padDown, maxSize.y - padTop);
         transform.position = newPosition;
     }
+    void OnFire(InputValue value)
+    {
+        if (shooter!=null)
+        {
+            shooter.isFiring = value.isPressed;
+        }
+    } 
 }

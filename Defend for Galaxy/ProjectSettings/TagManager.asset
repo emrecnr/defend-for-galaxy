@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Enemy
+  - Laser
+  - Laser Enemy
+  - Particle
   - 
   - 
   - 
@@ -46,6 +46,12 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 2388877103
+    locked: 0
+  - name: Lasers
+    uniqueID: 3922005979
+    locked: 0
+  - name: Particle
+    uniqueID: 481343013
     locked: 0
   - name: Player
     uniqueID: 2752419095

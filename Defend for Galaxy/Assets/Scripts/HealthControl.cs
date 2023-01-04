@@ -1,16 +1,24 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class HealthControl : MonoBehaviour
 {
+    [SerializeField] bool isPlayer;
     [SerializeField] int health = 50;
+    [SerializeField] int score = 50;
     [SerializeField] ParticleSystem hitEffect;
     [SerializeField] bool applyCamShake;
     CamShake cameraShake;
+    SoundPlayer audioPlayer;
+    ScoreControl scoreControl;
     private void Awake()
     {
         cameraShake = Camera.main.GetComponent<CamShake>();
+        audioPlayer = FindObjectOfType<SoundPlayer>();
+        scoreControl=FindObjectOfType<ScoreControl>();
     }
 
 
@@ -21,17 +29,31 @@ public class HealthControl : MonoBehaviour
         {
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
+            audioPlayer.PlayDamageClip();
             ShakeCamera();
             damageDealer.Hit();
         }
     }
+    public int GetHealth()
+    {
+        return health;
+    }
+
      void TakeDamage(int damage)
     {
         health -= damage;
         if (health<=0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+    void Die()
+    {
+        if (!isPlayer)
+        {
+            scoreControl.ModifyScore(score);
+        }
+        Destroy(gameObject);
     }
     void PlayHitEffect()
     {

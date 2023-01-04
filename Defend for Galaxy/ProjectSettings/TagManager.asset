@@ -41,8 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Background Star
     uniqueID: 1929936985
+    locked: 0
+  - name: Background Star2
+    uniqueID: 2794543947
     locked: 0
   - name: Enemy
     uniqueID: 2388877103
@@ -50,9 +53,12 @@ TagManager:
   - name: Lasers
     uniqueID: 3922005979
     locked: 0
-  - name: Particle
-    uniqueID: 481343013
+  - name: New Layer 6
+    uniqueID: 2763768923
     locked: 0
   - name: Player
     uniqueID: 2752419095
+    locked: 0
+  - name: Particle
+    uniqueID: 481343013
     locked: 0

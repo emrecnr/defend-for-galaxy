@@ -11,9 +11,14 @@ public class ShooterControl : MonoBehaviour
     [SerializeField] bool useAI;
     [SerializeField] float firingRateVariance = 0f;
     [SerializeField] float minimumFiringRate = 0.1f;
+    SoundPlayer audioPlayer;
     Coroutine coroutine;
 
     public bool isFiring;
+     void Awake()
+    {
+        audioPlayer = FindObjectOfType<SoundPlayer>();
+    }
     void Start()
     {
         if (useAI)
@@ -51,6 +56,7 @@ public class ShooterControl : MonoBehaviour
             Destroy(instance,laserLifeTime);
             float timeToNextLaser = Random.Range(baseFiringRate - firingRateVariance, baseFiringRate + firingRateVariance);
             timeToNextLaser = Mathf.Clamp(timeToNextLaser,minimumFiringRate,float.MaxValue);
+            audioPlayer.PlayShootingClip();
             yield return new WaitForSeconds(timeToNextLaser);
 
         }
